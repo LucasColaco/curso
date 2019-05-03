@@ -7,12 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity // entidade do JPA
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id // 
+	@GeneratedValue(strategy=GenerationType.IDENTITY) // geração automatica dos "ids" da classe categoria. criacao de tabelas no banco de dados
 	private Integer id;
 	private String nome;
 	
