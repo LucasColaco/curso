@@ -1,4 +1,4 @@
-package com.lucascolaco.curso.services;
+package com.lucascolaco.curso.services; // service consulta o repositorio
 
 
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.lucascolaco.curso.domain.Categoria;
 import com.lucascolaco.curso.repositories.CategoriaRepository;
+import com.lucascolaco.curso.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -18,7 +19,8 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) { // busca no banco de dados e retorna pronto.
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 		
 	}
 
