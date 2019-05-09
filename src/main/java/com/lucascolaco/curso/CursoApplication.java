@@ -15,6 +15,7 @@ import com.lucascolaco.curso.domain.Cidade;
 import com.lucascolaco.curso.domain.Cliente;
 import com.lucascolaco.curso.domain.Endereco;
 import com.lucascolaco.curso.domain.Estado;
+import com.lucascolaco.curso.domain.ItemPedido;
 import com.lucascolaco.curso.domain.Pagamento;
 import com.lucascolaco.curso.domain.PagamentoComBoleto;
 import com.lucascolaco.curso.domain.PagamentoComCartao;
@@ -27,6 +28,7 @@ import com.lucascolaco.curso.repositories.CidadeRepository;
 import com.lucascolaco.curso.repositories.ClienteRepository;
 import com.lucascolaco.curso.repositories.EnderecoRepository;
 import com.lucascolaco.curso.repositories.EstadoRepository;
+import com.lucascolaco.curso.repositories.ItemPedidoRepository;
 import com.lucascolaco.curso.repositories.PagamentoRepository;
 import com.lucascolaco.curso.repositories.PedidoRepository;
 import com.lucascolaco.curso.repositories.ProdutoRepository;
@@ -50,6 +52,8 @@ public class CursoApplication implements CommandLineRunner{ // esse comando vai 
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -118,7 +122,21 @@ public class CursoApplication implements CommandLineRunner{ // esse comando vai 
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2)); 
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 
+		
 	
 }
 	
