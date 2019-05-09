@@ -15,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -29,7 +28,7 @@ public class Produto implements Serializable{
 	private Double preco;
 	
 	
-	@JsonBackReference // faz parte da serialização
+	@JsonIgnore
 	@ManyToMany // faz isso quando se tem relacao de muitos para muitos, tem que criar uma tabela para fazer o meio de campo.
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 		joinColumns = @JoinColumn(name = "produto_id"),
