@@ -5,10 +5,12 @@ package com.lucascolaco.curso.services; // service consulta o repositorio
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.lucascolaco.curso.domain.Categoria;
 import com.lucascolaco.curso.repositories.CategoriaRepository;
+import com.lucascolaco.curso.services.exceptions.DataIntegrityException;
 import com.lucascolaco.curso.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -33,6 +35,16 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete (Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
+		}
 	}
 
 }
