@@ -17,7 +17,7 @@ public class CategoriaService {
 	@Autowired // instanciacao do obj, vai ser automaticamente instanciada
 	private CategoriaRepository repo; // dependencia de obj
 	
-	public Categoria buscar(Integer id) { // busca no banco de dados e retorna pronto.
+	public Categoria find(Integer id) { // busca no banco de dados e retorna pronto.
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
@@ -28,6 +28,11 @@ public class CategoriaService {
 		obj.setId(null); // tem que ser nulo, pois se tiver algum id, o metodo save vai pensar que é um atualizacao.
 		return repo.save(obj);
 		
+	}
+	
+	public Categoria update(Categoria obj) {
+		find(obj.getId());
+		return repo.save(obj);
 	}
 
 }

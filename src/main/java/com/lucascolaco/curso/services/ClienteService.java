@@ -17,7 +17,7 @@ public class ClienteService {
 	@Autowired // instanciacao do obj, vai ser automaticamente instanciada
 	private ClienteRepository repo; // dependencia de obj
 	
-	public Cliente buscar(Integer id) { // busca no banco de dados e retorna pronto.
+	public Cliente find(Integer id) { // busca no banco de dados e retorna pronto.
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

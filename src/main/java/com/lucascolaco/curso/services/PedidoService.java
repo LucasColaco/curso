@@ -17,7 +17,7 @@ public class PedidoService {
 	@Autowired // instanciacao do obj, vai ser automaticamente instanciada
 	private PedidoRepository repo; // dependencia de obj
 	
-	public Pedido buscar(Integer id) { // busca no banco de dados e retorna pronto.
+	public Pedido find(Integer id) { // busca no banco de dados e retorna pronto.
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
