@@ -11,10 +11,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.lucascolaco.curso.domain.enums.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) // mapeamento de herenca
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")	
 public abstract class Pagamento implements Serializable{ // abstract para garantir que voce nao vai conseguir instanciar objetos do tipo Pagemento
 	private static final long serialVersionUID = 1L;
 	
